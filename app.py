@@ -186,7 +186,7 @@ if selected_page == 'Student Gradebook':
     fig_combined.add_hline(y=assumption_at_risk, line_dash="dot", xref='paper')
 
     fig_combined.add_annotation(
-        x=0.94, y=last_grade_score*1.05, xref="paper", yref="y", text=f'{last_grade_score}', font_size=24, font_color='#171717', 
+        x=0.94, y=last_grade_score*1.02, xref="paper", yref="y", text=f'{last_grade_score}', font_size=24, font_color='#171717', 
         showarrow=True, ax=0, ay=-60, arrowhead=2, arrowsize=1, arrowwidth=2, arrowcolor='#171717'
         )
     
