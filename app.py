@@ -12,7 +12,7 @@ from twilio.rest import Client
 
 #the following line needs your Twilio Account SID and Auth Token
 account_sid = 'ACb023703214a282446ab1efb0289ae5ae'
-auth_token = '410736297f23f31e82980db30f6a121b'
+auth_token = '108a249ce155a3ed039f28568d57466b'
 client = Client(account_sid, auth_token)
 
 
