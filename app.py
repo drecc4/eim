@@ -149,10 +149,17 @@ if selected_page == 'Student Gradebook':
     
     st.markdown(' ')
 
-    if at_risk_courses > 0:
-        st.metric(label="Courses At Risk", value=at_risk_courses.astype(float))
-    else:
-        st.metric(label="Courses At Risk", value='None')
+    #metrics
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(label="Current GPA", value=int(last_grade_gpa))
+    with col2:
+        st.metric(label="Last Grade", value=int(last_grade_score))
+    with col3:
+        if at_risk_courses > 0:
+            st.metric(label="Courses At Risk", value=at_risk_courses.astype(float))
+        else:
+            st.metric(label="Courses At Risk", value='None')
     
 
     #function to conditionally color charts
