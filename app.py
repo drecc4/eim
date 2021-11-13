@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.graph_objects as go
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from datetime import date
 import random
 from twilio.rest import Client
@@ -148,21 +149,6 @@ if selected_page == 'Student Gradebook':
     
     st.markdown(' ')
 
-    
-
-    #metrics
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric(label="Current GPA", value=last_grade_gpa)
-    with col2:
-        st.metric(label="Last Grade", value=last_grade_score)
-    with col3:
-        if at_risk_courses > 0:
-            st.metric(label="Courses At Risk", value=at_risk_courses.astype(float))
-        else:
-            st.metric(label="Courses At Risk", value='None')
-
-
 
     #function to conditionally color charts
     def color_area_on_gpa(gpa):
@@ -223,19 +209,4 @@ elif selected_page == 'Coach Dashboard':
 
 
     st.write('Coming Soon')
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
 
