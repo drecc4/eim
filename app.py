@@ -99,7 +99,7 @@ def send_sms_alert(phone, student, grade, course_code, gpa):
         to_number = f'+1{phone}'
         from_number = "+13185089187"
         alert_message = f'''Hey Coach, Your student, {student} just received a {grade} on their {course_code} assignment. This score lowers their overall gpa to {gpa}.'''
-        client.messages.create(to=to_number, from_=from_number, body=alert_message)
+        return(client.messages.create(to=to_number, from_=from_number, body=alert_message))
     else:
         ''
 
