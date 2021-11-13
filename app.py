@@ -149,6 +149,8 @@ if selected_page == 'Student Gradebook':
     
     st.markdown(' ')
 
+    st.metric(label="Current GPA", value=last_grade_gpa)
+    
 
     #function to conditionally color charts
     def color_area_on_gpa(gpa):
