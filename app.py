@@ -149,8 +149,6 @@ if selected_page == 'Student Gradebook':
     
     st.markdown(' ')
 
-    st.write(last_grade_gpa)
-
     #metrics
     col1, col2, col3 = st.columns(3)
     with col1:
