@@ -134,7 +134,7 @@ if selected_page == 'Student Gradebook':
     last_grade_abbvname = df_gradebook_selection_last_grade.Student.str.split(expand=True)[0].max()
     last_grade_score = df_gradebook_selection_last_grade.Grade.max()
     last_grade_course = df_gradebook_selection_last_grade.Course.max()
-    last_grade_gpa = df_gradebook_selection_last_grade.RunningGPA.max()
+    last_grade_gpa = int(df_gradebook_selection_last_grade.RunningGPA.max())
     last_grade_date = df_gradebook_selection_last_grade.Date.max()
 
     df_gradebook_selection_courses = df_gradebook_selection.groupby(['CourseCode']).tail(1)
