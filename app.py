@@ -132,7 +132,7 @@ if selected_page == 'Student Gradebook':
     #dynamic warning box based on student last assignment score
     df_gradebook_selection_last_grade = df_gradebook_selection.tail(1)
     last_grade_abbvname = df_gradebook_selection_last_grade.Student.str.split(expand=True)[0].max()
-    last_grade_score = df_gradebook_selection_last_grade.Grade.max()
+    last_grade_score = int(df_gradebook_selection_last_grade.Grade.max())
     last_grade_course = df_gradebook_selection_last_grade.Course.max()
     last_grade_gpa = int(df_gradebook_selection_last_grade.RunningGPA.max())
     last_grade_date = df_gradebook_selection_last_grade.Date.max()
