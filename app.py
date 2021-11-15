@@ -1,22 +1,22 @@
-import streamlit as st
+import os
+import random
 import pandas as pd
 import numpy as np
+from datetime import date
+from dotenv import load_dotenv, find_dotenv
+import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-from datetime import date
-import random
 from twilio.rest import Client
 
-#------------------------------------------------------------------------------------------
-
-#the following line needs your Twilio Account SID and Auth Token
-account_sid = 'ACb023703214a282446ab1efb0289ae5ae'
-auth_token = '108a249ce155a3ed039f28568d57466b'
+#import Twilio credentials
+load_dotenv()
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 client = Client(account_sid, auth_token)
 
-
 #------------------------------------------------------------------------------------------
+
 
 #Sidebar Settings
 
@@ -99,7 +99,7 @@ def send_sms_alert(phone, student, grade, course_code, gpa):
         to_number = f'+1{phone}'
         from_number = "+13185089187"
         alert_message = f'''Hey Coach, Your student, {student} just received a {grade} on their {course_code} assignment. This score lowers their overall gpa to {gpa}.'''
-        return(client.messages.create(to=to_number, from_=from_number, body=alert_message))
+        client.messages.create(to=to_number, from_=from_number, body=alert_message)
     else:
         ''
 
@@ -149,18 +149,21 @@ if selected_page == 'Student Gradebook':
     
     st.markdown(' ')
 
+    st.write(last_grade_gpa)
+
     #metrics
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric(label="Current GPA", value=int(last_grade_gpa))
+        st.metric(label="Current GPA", value=last_grade_gpa)
     with col2:
-        st.metric(label="Last Grade", value=int(last_grade_score))
+        st.metric(label="Last Grade", value=last_grade_score)
     with col3:
         if at_risk_courses > 0:
-            st.metric(label="Courses At Risk", value=int(at_risk_courses))
+            st.metric(label="Courses At Risk", value=at_risk_courses.astype(float))
         else:
             st.metric(label="Courses At Risk", value='None')
-    
+
+
 
     #function to conditionally color charts
     def color_area_on_gpa(gpa):
@@ -186,7 +189,7 @@ if selected_page == 'Student Gradebook':
     fig_combined.add_hline(y=assumption_at_risk, line_dash="dot", xref='paper')
 
     fig_combined.add_annotation(
-        x=0.94, y=last_grade_score*1.02, xref="paper", yref="y", text=f'{last_grade_score}', font_size=24, font_color='#171717', 
+        x=0.94, y=last_grade_score*1.05, xref="paper", yref="y", text=f'{last_grade_score}', font_size=24, font_color='#171717', 
         showarrow=True, ax=0, ay=-60, arrowhead=2, arrowsize=1, arrowwidth=2, arrowcolor='#171717'
         )
     
@@ -221,4 +224,3 @@ elif selected_page == 'Coach Dashboard':
 
 
     st.write('Coming Soon')
-
